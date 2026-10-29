@@ -1,6 +1,6 @@
 # DailySpace — Frontend (Next.js 16 + TypeScript + Tailwind CSS)
 
-**Estudiante:** María Isabel Zuluaga Quintero  
+**Estudiante:** Mariaisabel Zuluaga Quintero  
 **Curso:** Desarrollo Web · Semestre 2026-2 · Universidad de Medellín  
 **Despliegue en Vercel:** [https://dailyspace-front.vercel.app](https://dailyspace-front.vercel.app) *(Pendiente despliegue de entrega)*  
 **API Backend Desplegada:** [https://dailyspace-back.onrender.com](https://dailyspace-back.onrender.com) *(Pendiente despliegue de entrega)*  

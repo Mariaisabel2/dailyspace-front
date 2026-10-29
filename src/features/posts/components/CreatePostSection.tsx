@@ -160,13 +160,10 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
           error={errors.title}
         />
 
-        {/* URL o Archivo de Imagen (Bonus +4 pts) */}
+        {/* URL o Archivo de Imagen */}
         <div className="flex flex-col mb-4">
-          <label className="text-sm font-semibold text-[#292524] mb-1.5 flex items-center justify-between">
-            <span>Imagen de la entrada (URL o archivo):</span>
-            <span className="text-xs text-amber-700 font-normal">
-              🎁 Bonus: Subida de archivo
-            </span>
+          <label className="text-sm font-semibold text-[#292524] mb-1.5 block">
+            Imagen de la entrada (URL o archivo):
           </label>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
