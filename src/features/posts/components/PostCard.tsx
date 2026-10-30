@@ -108,23 +108,18 @@ export const PostCard: React.FC<PostCardProps> = ({
           </span>
         </div>
 
-        {/* Lista de comentarios */}
+        {/* Lista de comentarios con scroll si hay muchos */}
         {comments.length > 0 && (
-          <div className="space-y-1.5 mb-3 max-h-32 overflow-y-auto pr-1">
-            {comments.slice(-3).map((comment, index) => (
+          <div className="space-y-1.5 mb-3 max-h-36 overflow-y-auto pr-1.5 rounded-lg">
+            {comments.map((comment, index) => (
               <div
                 key={index}
-                className="text-xs bg-white/80 rounded-lg p-2 border border-amber-100 text-[#292524]"
+                className="text-xs bg-white/90 rounded-lg p-2 border border-amber-100 text-[#292524] shadow-2xs break-words"
               >
                 <span className="font-semibold text-amber-800 mr-1.5">💬</span>
                 <span>{comment}</span>
               </div>
             ))}
-            {comments.length > 3 && (
-              <p className="text-[11px] text-stone-500 italic text-center">
-                + {comments.length - 3} comentarios más
-              </p>
-            )}
           </div>
         )}
 

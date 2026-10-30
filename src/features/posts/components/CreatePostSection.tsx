@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { CreatePostDto, PostVisibility } from "../domain/post";
 import { postsService } from "../services/postsService";
 import { Button } from "../../common/components/Button";
@@ -29,40 +29,6 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
   }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Manejador de subida de archivo de imagen (Bonus +4 pts)
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      setErrors((prev) => ({
-        ...prev,
-        media: "Por favor selecciona un archivo de imagen válido",
-      }));
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      setErrors((prev) => ({
-        ...prev,
-        media: "La imagen no debe superar los 5 MB",
-      }));
-      return;
-    }
-
-    setErrors((prev) => ({ ...prev, media: undefined }));
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      setImagePreview(result);
-      setMediaUrl(result);
-    };
-    reader.readAsDataURL(file);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,7 +69,6 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
       setMediaUrl("");
       setContent("");
       setImagePreview(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
 
       setSuccessMessage("¡Entrada publicada con éxito en tu bitácora! ✨");
       if (onPostCreated) {
@@ -160,35 +125,25 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
           error={errors.title}
         />
 
-        {/* URL o Archivo de Imagen */}
+        {/* URL de Imagen */}
         <div className="flex flex-col mb-4">
           <label className="text-sm font-semibold text-[#292524] mb-1.5 block">
-            Imagen de la entrada (URL o archivo):
+            URL de la imagen:
           </label>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
-            <input
-              type="url"
-              placeholder="https://ejemplo.com/foto.jpg"
-              value={mediaUrl.startsWith("data:") ? "" : mediaUrl}
-              onChange={(e) => {
-                setMediaUrl(e.target.value);
-                setImagePreview(e.target.value || null);
-              }}
-              className="px-3 py-2 text-xs rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder:text-stone-400"
-            />
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="text-xs file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200 cursor-pointer"
-            />
-          </div>
+          <input
+            type="url"
+            placeholder="https://images.unsplash.com/photo-..."
+            value={mediaUrl}
+            onChange={(e) => {
+              setMediaUrl(e.target.value);
+              setImagePreview(e.target.value.trim() || null);
+            }}
+            className="w-full px-3 py-2 text-xs rounded-lg border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-400 placeholder:text-stone-400"
+          />
 
           {errors.media && (
-            <span className="text-xs text-red-600 font-medium">{errors.media}</span>
+            <span className="text-xs text-red-600 font-medium mt-1">{errors.media}</span>
           )}
 
           {imagePreview && (
@@ -198,13 +153,13 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
                 src={imagePreview}
                 alt="Vista previa"
                 className="w-full h-full object-cover"
+                onError={() => setImagePreview(null)}
               />
               <button
                 type="button"
                 onClick={() => {
                   setImagePreview(null);
                   setMediaUrl("");
-                  if (fileInputRef.current) fileInputRef.current.value = "";
                 }}
                 className="absolute top-1 right-1 bg-black/60 text-white rounded-full w-5 h-5 text-[10px] flex items-center justify-center cursor-pointer"
               >
