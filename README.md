@@ -2,8 +2,8 @@
 
 **Estudiante:** Mariaisabel Zuluaga Quintero  
 **Curso:** Desarrollo Web · Semestre 2026-2 · Universidad de Medellín  
-**Despliegue en Vercel:** [https://dailyspace-front.vercel.app](https://dailyspace-front.vercel.app) *(Pendiente despliegue de entrega)*  
-**API Backend Desplegada:** [https://dailyspace-back.onrender.com](https://dailyspace-back.onrender.com) *(Pendiente despliegue de entrega)*  
+**Despliegue en Vercel:** [dailyspace-front.vercel.app](https://dailyspace-front.vercel.app)  
+**API Backend Desplegada:** [[https://dailyspace-back.onrender.com](https://dailyspace-back.onrender.com)](https://dailyspace-back.onrender.com) 
 
 ---
 
@@ -79,30 +79,16 @@ src/
    ```
 3. Configura las variables de entorno creando un archivo `.env.local`:
    ```env
-   NEXT_PUBLIC_API_HOST=http://localhost:4000
+   NEXT_PUBLIC_API_HOST=https://dailyspace-back.onrender.com
    ```
 4. Ejecuta el servidor de desarrollo:
    ```bash
    npm run dev
    ```
-5. Abre en tu navegador [http://localhost:3000](http://localhost:3000).
+5. Abre en tu navegador [dailyspace-front.vercel.app](http://localhost:3000).
 
----
 
-## 🔑 4. Credenciales de Prueba del Seed
-
-Para evaluar los roles del sistema, utiliza las siguientes credenciales generadas en el seed:
-
-| Rol | Correo Electrónico | Contraseña | Permisos |
-| :--- | :--- | :--- | :--- |
-| **Administrador (`admin`)** | `admin@dailyspace.com` | `Admin123!` | Acceso completo a `/admin`, CRUD del catálogo, eliminar entradas y ver métricas. |
-| **Usuario Estándar (`user`)** | `user@dailyspace.com` | `User123!` | Publicar comentarios, ver `/mis-comentarios`, dar likes y explorar feed. |
-
-*(En la pantalla de Login hay botones de llenado rápido para cargar estas credenciales en un solo clic).*
-
----
-
-## 🧠 5. Decisiones Técnicas (En palabras propias)
+## 🧠 4. Decisiones Técnicas (En palabras propias)
 
 ### 1. Flujo completo de un login: desde el formulario hasta la respuesta de una ruta protegida
 1. **Envío del Formulario:** El usuario escribe sus credenciales en `LoginForm`. Se validan sintácticamente en el cliente (formato de correo y contraseña $\ge 6$ caracteres) sin usar `alert()`.
@@ -128,14 +114,5 @@ Para evaluar los roles del sistema, utiliza las siguientes credenciales generada
 - **Para qué se usó:** Como asistente de arquitectura para estructurar la separación limpia por features en Next.js, diseñar los contratos de TypeScript basados en la Entrega 1 y configurar las directivas de Tailwind CSS.
 - **Qué se tuvo que corregir:** La IA sugirió inicialmente utilizar la convención deprecada `middleware.ts`, la cual en Next.js 16 arrojaba advertencias en consola; se migró a la nueva especificación oficial `proxy.ts` con export nombrado `proxy`. Asimismo, se ajustó la inyección de errores para garantizar que el error de email duplicado (409) se renderizara exactamente bajo el campo de texto en lugar de alertas globales.
 
----
 
-## 📸 6. Captura de Network mostrando el Header Authorization
-> *(Aquí se adjuntará la captura de pantalla de las herramientas de desarrollador del navegador mostrando la petición con `Authorization: Bearer <token>` una vez esté conectado el backend)*:
 
-```http
-GET /api/comments/mias HTTP/1.1
-Host: localhost:4000
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-Content-Type: application/json
-```
