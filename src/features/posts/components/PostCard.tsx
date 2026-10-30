@@ -128,28 +128,35 @@ export const PostCard: React.FC<PostCardProps> = ({
           </div>
         )}
 
-        {/* Input para agregar comentario */}
-        <form onSubmit={handleCommentSubmit} className="flex gap-2">
-          <input
-            type="text"
-            placeholder={
-              currentUserName
-                ? "Escribe un comentario..."
-                : "Inicia sesión para comentar..."
-            }
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            disabled={!currentUserName || isSubmitting}
-            className="flex-1 px-3 py-1.5 text-xs bg-white rounded-lg border border-amber-300 focus:outline-none focus:ring-1 focus:ring-amber-500 placeholder:text-stone-400 disabled:opacity-60 disabled:bg-stone-50"
-          />
-          <button
-            type="submit"
-            disabled={!currentUserName || !commentText.trim() || isSubmitting}
-            className="px-3 py-1.5 bg-[#d97706] hover:bg-[#b45309] text-white text-xs font-bold rounded-lg transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "..." : "Enviar"}
-          </button>
-        </form>
+        {/* Input para agregar comentario o aviso de entrada privada */}
+        {post.visibility === "Privado" ? (
+          <div className="text-center py-1.5 px-3 bg-stone-100/80 border border-stone-200 rounded-lg text-[11px] text-stone-500 font-medium flex items-center justify-center gap-1.5">
+            <span>🔒</span>
+            <span>Entrada privada — comentarios deshabilitados</span>
+          </div>
+        ) : (
+          <form onSubmit={handleCommentSubmit} className="flex gap-2">
+            <input
+              type="text"
+              placeholder={
+                currentUserName
+                  ? "Escribe un comentario..."
+                  : "Inicia sesión para comentar..."
+              }
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              disabled={!currentUserName || isSubmitting}
+              className="flex-1 px-3 py-1.5 text-xs bg-white rounded-lg border border-amber-300 focus:outline-none focus:ring-1 focus:ring-amber-500 placeholder:text-stone-400 disabled:opacity-60 disabled:bg-stone-50"
+            />
+            <button
+              type="submit"
+              disabled={!currentUserName || !commentText.trim() || isSubmitting}
+              className="px-3 py-1.5 bg-[#d97706] hover:bg-[#b45309] text-white text-xs font-bold rounded-lg transition-colors disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "..." : "Enviar"}
+            </button>
+          </form>
+        )}
       </div>
     </article>
   );
