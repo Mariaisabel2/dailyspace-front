@@ -28,8 +28,8 @@ export function useComments() {
     fetchMyComments();
   }, [fetchMyComments]);
 
-  const addComment = async (dto: CreateCommentDto, postTitle?: string) => {
-    const created = await commentsService.createComment(dto, postTitle);
+  const addComment = async (dto: CreateCommentDto) => {
+    const created = await commentsService.createComment(dto);
     setComments((prev) => [created, ...prev]);
     return created;
   };

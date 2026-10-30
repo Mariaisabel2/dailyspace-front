@@ -96,7 +96,7 @@ export const CreatePostSection: React.FC<CreatePostSectionProps> = ({
         visibility,
       };
 
-      await postsService.createPost(dto, currentUser?.name || "mariaisabel");
+      await postsService.createPost(dto);
 
       // Limpiar formulario
       setTitle("");

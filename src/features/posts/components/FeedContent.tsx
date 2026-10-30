@@ -7,6 +7,7 @@ import { PostsGrid } from "./PostsGrid";
 import { CreatePostSection } from "./CreatePostSection";
 import { Pagination } from "../../common/components/Pagination";
 import { APP_CONFIG } from "../../common/config";
+import { commentsService } from "../../comments/services/commentsService";
 
 export const FeedContent: React.FC = () => {
   const {
@@ -32,24 +33,11 @@ export const FeedContent: React.FC = () => {
     }
   }, []);
 
-  const handleAddComment = (postId: number, comment: string) => {
-    // En mock actualiza localmente
-    setMockComment(postId, comment);
-  };
-
-  const setMockComment = (postId: number, commentText: string) => {
+  const handleAddComment = async (postId: number, comment: string) => {
     try {
-      const stored = localStorage.getItem("dailyspace_mock_posts");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        const post = parsed.find((p: { id: number }) => p.id === postId);
-        if (post) {
-          post.comments = [...(post.comments || []), commentText];
-          localStorage.setItem("dailyspace_mock_posts", JSON.stringify(parsed));
-        }
-      }
-    } catch {
-      // Ignorar
+      await commentsService.createComment({ postId, content: comment });
+    } catch (err) {
+      console.error("Error al crear comentario:", err);
     }
   };
 

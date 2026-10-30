@@ -53,4 +53,8 @@ export const authStorage = {
       // Ignorar
     }
   },
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  },
 };
