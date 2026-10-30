@@ -127,25 +127,25 @@ export const LoginForm: React.FC = () => {
         </Button>
       </form>
 
-      {/* Credenciales rápidas de prueba para el evaluador */}
+      {/* Botones de selección rápida de rol */}
       <div className="mt-6 pt-5 border-t border-amber-100 text-center">
         <p className="text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-2">
-          Credenciales de prueba del Seed:
+          Iniciar sesión como:
         </p>
         <div className="flex gap-2 justify-center">
           <button
             type="button"
             onClick={() => handleQuickFill("admin")}
-            className="px-2.5 py-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-lg hover:bg-purple-100 cursor-pointer font-medium"
+            className="px-3 py-1.5 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-lg hover:bg-purple-100 cursor-pointer font-medium"
           >
-            🛡️ Admin (admin@dailyspace.com)
+            🛡️ Admin
           </button>
           <button
             type="button"
             onClick={() => handleQuickFill("user")}
-            className="px-2.5 py-1 text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded-lg hover:bg-amber-100 cursor-pointer font-medium"
+            className="px-3 py-1.5 text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded-lg hover:bg-amber-100 cursor-pointer font-medium"
           >
-            👤 User (user@dailyspace.com)
+            👤 Usuario
           </button>
         </div>
       </div>
