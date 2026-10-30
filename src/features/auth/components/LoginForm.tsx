@@ -67,10 +67,10 @@ export const LoginForm: React.FC = () => {
   const handleQuickFill = (role: "admin" | "user") => {
     if (role === "admin") {
       setEmail("admin@dailyspace.com");
-      setPassword("Admin123!");
+      setPassword("");
     } else {
       setEmail("user@dailyspace.com");
-      setPassword("User123!");
+      setPassword("");
     }
     setErrors({});
   };
