@@ -64,17 +64,6 @@ export const LoginForm: React.FC = () => {
     }
   };
 
-  const handleQuickFill = (role: "admin" | "user") => {
-    if (role === "admin") {
-      setEmail("admin@dailyspace.com");
-      setPassword("");
-    } else {
-      setEmail("user@dailyspace.com");
-      setPassword("");
-    }
-    setErrors({});
-  };
-
   return (
     <div className="w-full max-w-md mx-auto bg-white border-2 border-[#ffe066] rounded-3xl p-8 shadow-[0_10px_25px_rgba(217,119,6,0.08)]">
       <div className="text-center mb-6">
@@ -126,29 +115,6 @@ export const LoginForm: React.FC = () => {
           Entrar a DailySpace
         </Button>
       </form>
-
-      {/* Botones de selección rápida de rol */}
-      <div className="mt-6 pt-5 border-t border-amber-100 text-center">
-        <p className="text-[11px] font-bold text-stone-500 uppercase tracking-wider mb-2">
-          Iniciar sesión como:
-        </p>
-        <div className="flex gap-2 justify-center">
-          <button
-            type="button"
-            onClick={() => handleQuickFill("admin")}
-            className="px-3 py-1.5 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-lg hover:bg-purple-100 cursor-pointer font-medium"
-          >
-            🛡️ Admin
-          </button>
-          <button
-            type="button"
-            onClick={() => handleQuickFill("user")}
-            className="px-3 py-1.5 text-xs bg-amber-50 text-amber-800 border border-amber-200 rounded-lg hover:bg-amber-100 cursor-pointer font-medium"
-          >
-            👤 Usuario
-          </button>
-        </div>
-      </div>
 
       <div className="mt-6 text-center text-xs text-[#78716c]">
         ¿No tienes una cuenta aún?{" "}
