@@ -114,7 +114,7 @@ src/
 - **Para qué se usó:** Como asistente de arquitectura para estructurar la separación limpia por features en Next.js, diseñar los contratos de TypeScript basados en la Entrega 1 y configurar las directivas de Tailwind CSS.
 - **Qué se tuvo que corregir:** La IA sugirió inicialmente utilizar la convención deprecada `middleware.ts`, la cual en Next.js 16 arrojaba advertencias en consola; se migró a la nueva especificación oficial `proxy.ts` con export nombrado `proxy`. Asimismo, se ajustó la inyección de errores para garantizar que el error de email duplicado (409) se renderizara exactamente bajo el campo de texto en lugar de alertas globales.
 
-## 🔑5. Credenciales de Prueba (Roles del Sistema)
+## 🔑 5. Credenciales de Prueba (Roles del Sistema)
 
 Para la evaluación y prueba de permisos por rol, la base de datos cuenta con los siguientes usuarios iniciales generados en el seed:
 
@@ -122,4 +122,15 @@ Para la evaluación y prueba de permisos por rol, la base de datos cuenta con lo
 | :--- | :--- | :--- | :--- |
 | **Administrador (`admin`)** | `admin@dailyspace.com` | `Admin123!` | Acceso completo al panel administrativo (`/admin`), CRUD total del catálogo de publicaciones (`POST`, `PUT`, `DELETE /api/posts`), eliminar entradas con modal de confirmación y listar todos los comentarios. |
 | **Usuario Estándar (`user`)** | `user@dailyspace.com` | `User123!` | Explorar el catálogo público, dar likes a publicaciones, crear comentarios (`POST /api/comments`) y gestionar su historial en `/mis-comentarios` (`GET /api/comments/mias`). |
+
+---
+
+## 🌐 6. Evidencia de Conexión y Peticiones Reales de Red (Network)
+
+A continuación se presenta la captura de la pestaña **Network (Red)** de las herramientas de desarrollador, demostrando que el frontend consume en tiempo real la API REST desplegada en producción (`https://dailyspace-back.onrender.com`) y no utiliza datos quemados ni mockups:
+
+![Pestaña Network - Consumo real de la API REST](public/docs/network-proof.jpg)
+
+*Evidencia de peticiones `GET /api/posts` (con paginación real) hacia `dailyspace-back.onrender.com` respondiendo exitosamente con código `200 OK`.*
+
 
