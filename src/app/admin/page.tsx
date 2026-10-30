@@ -9,6 +9,7 @@ import { Post, UpdatePostDto } from "@/features/posts/domain/post";
 import { postsService } from "@/features/posts/services/postsService";
 import { ConfirmDeleteModal } from "@/features/admin/components/ConfirmDeleteModal";
 import { EditPostModal } from "@/features/admin/components/EditPostModal";
+import { CreatePostSection } from "@/features/posts/components/CreatePostSection";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -27,6 +28,9 @@ export default function AdminPage() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [postToEdit, setPostToEdit] = useState<Post | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Estado para desplegar formulario de nueva entrada en admin
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   // Guard de rol: solo admin puede estar aquí; si es usuario normal redirige al inicio
   useEffect(() => {
@@ -124,11 +128,13 @@ export default function AdminPage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href="/#create">
-              <Button variant="primary" size="sm">
-                + Nueva Entrada
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setShowCreateForm((prev) => !prev)}
+            >
+              {showCreateForm ? "Cerrar Formulario" : "+ Nueva Entrada"}
+            </Button>
             <Link href="/">
               <Button variant="outline" size="sm">
                 Ver Sitio Público
@@ -136,6 +142,19 @@ export default function AdminPage() {
             </Link>
           </div>
         </div>
+
+        {/* Formulario de creación desplegable en el panel de Admin */}
+        {showCreateForm && (
+          <div className="mb-8">
+            <CreatePostSection
+              currentUser={user}
+              onPostCreated={() => {
+                fetchCatalog();
+                setShowCreateForm(false);
+              }}
+            />
+          </div>
+        )}
 
         {/* Barra de Búsqueda Rápida en el Catálogo */}
         <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/80 p-4 rounded-2xl border border-amber-200">

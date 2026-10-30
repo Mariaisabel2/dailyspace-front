@@ -43,11 +43,13 @@ export const FeedContent: React.FC = () => {
 
   return (
     <div className="space-y-12">
-      {/* Sección del Formulario de Creación de Entrada */}
-      <CreatePostSection
-        onPostCreated={refetch}
-        currentUser={currentUser}
-      />
+      {/* Sección del Formulario de Creación de Entrada solo para usuarios autenticados */}
+      {currentUser && (
+        <CreatePostSection
+          onPostCreated={refetch}
+          currentUser={currentUser}
+        />
+      )}
 
       {/* Sección del Feed "Para ti" */}
       <section id="feed" className="scroll-mt-20">
